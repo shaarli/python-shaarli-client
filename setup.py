@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Setup script for shaarli-client"""
 import codecs
+import os
+import re
 
 from setuptools import find_packages, setup
 
@@ -11,12 +13,21 @@ def get_long_description():
         return f_readme.read()
 
 
+def get_package_metadata(attribute):
+    """Reads metadata from the main package's __init__"""
+    with open(os.path.join('shaarli_client', '__init__.py'), 'r') as f_init:
+        return re.search(
+            r'^__{attr}__\s*=\s*[\'"]([^\'"]*)[\'"]'.format(attr=attribute),
+            f_init.read(), re.MULTILINE
+        ).group(1)
+
+
 setup(
-    name='shaarli-client',
-    version='0.1',
-    description='CLI to interact with a Shaarli instance',
+    name=get_package_metadata('title'),
+    version=get_package_metadata('version'),
+    description=get_package_metadata('brief'),
     long_description=get_long_description(),
-    author='The Shaarli Community',
+    author=get_package_metadata('author'),
     maintainer='VirtualTam',
     maintainer_email='virtualtam@flibidi.net',
     license='MIT',
