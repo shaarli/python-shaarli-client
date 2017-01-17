@@ -19,3 +19,4 @@ Added
 * Packaging metadata
 * Sphinx documentation
 * Tox configuration
+* Travis CI configuration

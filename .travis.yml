@@ -1,0 +1,12 @@
+language: python
+cache:
+  directories:
+    - $HOME/.cache/pip
+matrix:
+  include:
+    - python: 3.4
+      env: TOXENV=docs
+install:
+  - pip install tox
+script:
+  - tox
