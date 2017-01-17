@@ -18,3 +18,4 @@ Added
 * Python project structure
 * Packaging metadata
 * Sphinx documentation
+* Tox configuration
