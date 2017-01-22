@@ -1,5 +1,6 @@
 isort==4.2.5
 pycodestyle==2.2.0
+pydocstyle==1.1.1
 pylint==1.6.4
 pytest==3.0.5
 pytest-pylint==0.6.0
