@@ -1,1 +1,3 @@
+-r docs.txt
+-r tests.txt
 tox==2.5.0
