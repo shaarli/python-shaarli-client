@@ -34,7 +34,15 @@ setup(
     url='https://github.com/shaarli/python-shaarli-client',
     keywords='bookmark bookmarking shaarli social',
     packages=find_packages(exclude=['tests.*', 'tests']),
-    install_requires=[],
+    entry_points={
+        'console_scripts': [
+            'shaarli = shaarli_client.main:main',
+        ],
+    },
+    install_requires=[
+        'requests >= 2.10',
+        'requests-jwt >= 0.4'
+    ],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
