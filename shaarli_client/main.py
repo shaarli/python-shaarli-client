@@ -2,7 +2,7 @@
 import json
 from argparse import ArgumentParser
 
-from .v1 import ShaarliV1Client
+from .client import ShaarliV1Client
 
 
 def main():

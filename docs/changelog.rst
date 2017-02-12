@@ -18,6 +18,7 @@ Added
 * Python project structure
 * Packaging metadata
 * Code quality checking (lint)
+* Test coverage
 * Sphinx documentation
 * Tox configuration
 * Travis CI configuration
