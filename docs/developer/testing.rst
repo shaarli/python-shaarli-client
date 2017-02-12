@@ -33,7 +33,8 @@ Coding style is checked using tools provided by the `Python Code Quality Authori
 
 Tests are run using the `pytest`_ test framework/harness, with the following plugins:
 
-* `pytest-pylint`_: pylint integration
+* `pytest-pylint`_: `pylint`_ integration
+* `pytest-cov`_: `coverage`_ integration
 
 Running the tests
 -----------------
@@ -56,6 +57,7 @@ To run specific tests and renew the corresponding virtualenv:
 
    $ tox -r py35
 
+.. _coverage: https://coverage.readthedocs.io/en/latest/
 .. _isort: https://github.com/timothycrosley/isort#readme
 .. _PEP8: http://pep8.readthedocs.org
 .. _PEP257: http://pep257.readthedocs.org
@@ -63,6 +65,7 @@ To run specific tests and renew the corresponding virtualenv:
 .. _pydocstyle: http://www.pydocstyle.org/en/latest/
 .. _pylint: http://www.pylint.org/
 .. _pytest: http://docs.pytest.org/en/latest/
+.. _pytest-cov: https://pytest-cov.readthedocs.io/en/latest/
 .. _pytest-pylint: https://github.com/carsongee/pytest-pylint
 .. _Python Code Quality Authority: http://meta.pycqa.org/en/latest/
 .. _reStructuredtext: http://www.sphinx-doc.org/en/stable/rest.html
