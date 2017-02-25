@@ -6,6 +6,19 @@ import requests
 from requests_jwt import JWTAuth
 
 
+class InvalidEndpointParameters(Exception):
+    """Raised when unauthorized endpoint parameters are used"""
+
+    def __init__(self, endpoint_name, parameters):
+        """Custom exception message"""
+        super(InvalidEndpointParameters, self).__init__(
+            "Invalid parameters for endpoint '%s': %s" % (
+                endpoint_name,
+                ", ".join(parameters)
+            )
+        )
+
+
 class ShaarliV1Client:
     """Shaarli REST API v1 client"""
 
@@ -23,6 +36,21 @@ class ShaarliV1Client:
         self.uri = uri
         self.secret = secret
         self.version = 1
+
+    @classmethod
+    def _check_endpoint_params(cls, endpoint_name, params):
+        """Check parameters are allowed for a given endpoint"""
+        if not params:
+            return
+
+        invalid_parameters = list()
+
+        for param in params.keys():
+            if param not in cls.endpoints[endpoint_name]['params'].keys():
+                invalid_parameters.append(param)
+
+        if invalid_parameters:
+            raise InvalidEndpointParameters(endpoint_name, invalid_parameters)
 
     @classmethod
     def _retrieve_http_params(cls, args):
