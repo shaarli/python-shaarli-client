@@ -1,9 +1,26 @@
 """Shaarli REST API v1 client"""
 import calendar
 import time
+from argparse import Action
 
 import requests
 from requests_jwt import JWTAuth
+
+
+class SearchFormatAction(Action):
+    """Format values for searching"""
+
+    # pylint: disable=too-few-public-methods
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        """Convert a list of strings to a search query string
+
+        Source:           ["term1", "term2", "term3", ...]
+        Formatted string: "term1 term2 term3 ..."
+
+        Actual query:     term1+term2+term3+...
+        """
+        setattr(namespace, self.dest, ' '.join(values))
 
 
 class InvalidEndpointParameters(Exception):
@@ -28,6 +45,34 @@ class ShaarliV1Client:
             'method': 'GET',
             'help': "Get information about this instance",
             'params': None,
+        },
+        'get-links': {
+            'path': 'links',
+            'method': 'GET',
+            'help': "Get a collection of links ordered by creation date",
+            'params': {
+                'offset': {
+                    'help': "Offset from which to start listing links",
+                    'type': int,
+                },
+                'limit': {
+                    'help': "Number of links to retrieve or 'all'",
+                },
+                'searchtags': {
+                    'help': "List of tags",
+                    'nargs': '+',
+                    'action': SearchFormatAction,
+                },
+                'searchterm': {
+                    'help': "Search terms across all links fields",
+                    'nargs': '+',
+                    'action': SearchFormatAction,
+                },
+                'visibility': {
+                    'choices': ['all', 'private', 'public'],
+                    'help': "Filter links by visibility",
+                },
+            },
         },
     }
 
@@ -87,3 +132,8 @@ class ShaarliV1Client:
     def get_info(self):
         """Get information about this instance"""
         return self._request('GET', 'info', {})
+
+    def get_links(self, params):
+        """Get a collection of links ordered by creation date"""
+        self._check_endpoint_params('get-links', params)
+        return self._request('GET', 'links', params)

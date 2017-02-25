@@ -38,6 +38,7 @@ def main():
 
     try:
         response = ShaarliV1Client(args.url, args.secret).request(args)
+        print(response.url)
     except KeyError:
         parser.print_help()
         sys.exit(1)
