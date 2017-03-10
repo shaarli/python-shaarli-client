@@ -1,19 +1,15 @@
 """shaarli-client main CLI entrypoint"""
 import json
+import sys
 from argparse import ArgumentParser
 
 from .client import ShaarliV1Client
+from .utils import generate_all_endpoints_parsers
 
 
 def main():
     """Main CLI entrypoint"""
     parser = ArgumentParser()
-    parser.add_argument(
-        'endpoint',
-        choices=['info'],
-        default='info',
-        help="REST API endpoint"
-    )
     parser.add_argument(
         '-u',
         '--url',
@@ -31,11 +27,21 @@ def main():
         help="Output formatting"
     )
 
-    args = parser.parse_args()
-    client = ShaarliV1Client(args.url, args.secret)
+    subparsers = parser.add_subparsers(
+        dest='endpoint_name',
+        help="REST API endpoint"
+    )
 
-    if args.endpoint == 'info':
-        response = client.info()
+    generate_all_endpoints_parsers(subparsers, ShaarliV1Client.endpoints)
+
+    args = parser.parse_args()
+
+    try:
+        response = ShaarliV1Client(args.url, args.secret).request(args)
+        print(response.url)
+    except KeyError:
+        parser.print_help()
+        sys.exit(1)
 
     if args.output == 'json':
         print(response.json())

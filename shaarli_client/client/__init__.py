@@ -1,2 +1,2 @@
 """Shaarli REST API clients"""
-from .v1 import ShaarliV1Client
+from .v1 import InvalidEndpointParameters, ShaarliV1Client

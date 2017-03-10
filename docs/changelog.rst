@@ -22,6 +22,7 @@ Added
 * Sphinx documentation
 * Tox configuration
 * Travis CI configuration
-* REST API client
+* REST API client:
 
   * ``/api/v1/info``
+  * ``/api/v1/links``
