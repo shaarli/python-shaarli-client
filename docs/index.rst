@@ -19,6 +19,7 @@ Command-line interface (CLI) to interact with a `Shaarli`_ instance.
 
    developer/testing
    developer/releasing
+   developer/gpg
 
 
 Indices and tables
