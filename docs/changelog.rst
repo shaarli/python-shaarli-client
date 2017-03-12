@@ -19,7 +19,12 @@ Added
 * Packaging metadata
 * Code quality checking (lint)
 * Test coverage
-* Sphinx documentation
+* Sphinx documentation:
+
+  * user - installation, usage
+  * developer - testing, releasing
+
+* Makefile
 * Tox configuration
 * Travis CI configuration
 * REST API client:

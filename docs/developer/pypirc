@@ -1,0 +1,13 @@
+[distutils]
+index-servers=
+    pypi
+    testpypi
+
+[pypi]
+repository = https://pypi.python.org/pypi
+username = <PyPI username>
+
+[testpypi]
+repository = https://testpypi.python.org/pypi
+username = <TestPyPI username>
+password = <TestPyPI password>
