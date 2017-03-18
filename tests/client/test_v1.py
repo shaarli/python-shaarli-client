@@ -4,10 +4,11 @@ from argparse import Namespace
 from unittest import mock
 
 import pytest
+from requests.exceptions import InvalidSchema, MissingSchema
 
 from shaarli_client.client import InvalidEndpointParameters, ShaarliV1Client
 
-SHAARLI_URL = 'http://domain.tld/shaarli/'
+SHAARLI_URL = 'http://domain.tld/shaarli'
 SHAARLI_SECRET = 's3kr37!'
 
 
@@ -21,6 +22,31 @@ def test_invalid_endpoint_parameters_exception():
 def test_constructor():
     """Instantiate a new client"""
     ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET)
+
+
+def test_constructor_no_uri():
+    """Missing URI"""
+    with pytest.raises(TypeError) as exc:
+        ShaarliV1Client(None, SHAARLI_SECRET)
+    assert "Missing Shaarli URI" in str(exc.value)
+
+
+def test_constructor_no_secret():
+    """Missing authentication secret"""
+    with pytest.raises(TypeError) as exc:
+        ShaarliV1Client(SHAARLI_URL, None)
+    assert "Missing Shaarli secret" in str(exc.value)
+
+
+@pytest.mark.parametrize("test_uri", [
+    SHAARLI_URL,
+    '%s/' % SHAARLI_URL,
+    '%s///' % SHAARLI_URL,
+])
+def test_constructor_strip_uri(test_uri):
+    """Ensure trailing / are stripped"""
+    client = ShaarliV1Client(test_uri, SHAARLI_SECRET)
+    assert client.uri == SHAARLI_URL
 
 
 def test_check_endpoint_params_none():
@@ -75,6 +101,19 @@ def test_get_info_uri(request):
         auth=mock.ANY,
         params={}
     )
+
+
+@pytest.mark.parametrize('uri, klass, msg', [
+    ('shaarli', MissingSchema, "No schema supplied"),
+    ('http:/shaarli', MissingSchema, "No schema supplied"),
+    ('htp://shaarli', InvalidSchema, "No connection adapters"),
+])
+def test_get_info_invalid_uri(uri, klass, msg):
+    """Invalid URI format"""
+    with pytest.raises(ValueError) as exc:
+        ShaarliV1Client(uri, SHAARLI_SECRET).get_info()
+    assert isinstance(exc.value, klass)
+    assert msg in str(exc.value)
 
 
 @mock.patch('requests.request')

@@ -9,11 +9,18 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 .. _Keep A Changelog: http://keepachangelog.com/
 .. _Semantic Versioning: http://semver.org/
 
+`v0.2.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.2.0>`_ - UNPUBLISHED
+----------------------------------------------------------------------------------------------
+
+**Added:**
+
+* Add client parameter checks and error handling
+
+
 `v0.1.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.1.0>`_ - 2017-03-12
 ---------------------------------------------------------------------------------------------
 
-Added
-~~~~~
+**Added:**
 
 * Python project structure
 * Packaging metadata
