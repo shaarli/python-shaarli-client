@@ -1,5 +1,6 @@
 """shaarli-client main CLI entrypoint"""
 import json
+import logging
 import sys
 from argparse import ArgumentParser
 
@@ -39,7 +40,8 @@ def main():
     try:
         response = ShaarliV1Client(args.url, args.secret).request(args)
         print(response.url)
-    except KeyError:
+    except (KeyError, TypeError, ValueError) as exc:
+        logging.error(exc)
         parser.print_help()
         sys.exit(1)
 

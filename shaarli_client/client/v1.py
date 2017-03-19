@@ -78,7 +78,12 @@ class ShaarliV1Client:
 
     def __init__(self, uri, secret):
         """Client constructor"""
-        self.uri = uri
+        if not uri:
+            raise TypeError("Missing Shaarli URI")
+        if not secret:
+            raise TypeError("Missing Shaarli secret")
+
+        self.uri = uri.rstrip('/')
         self.secret = secret
         self.version = 1
 
