@@ -10,6 +10,7 @@ Command-line interface (CLI) to interact with a `Shaarli`_ instance.
    :caption: User Documentation
 
    user/installation
+   user/configuration
    user/usage
    changelog
 

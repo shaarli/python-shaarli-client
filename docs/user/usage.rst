@@ -13,7 +13,8 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
 
    $ shaarli -h
 
-   usage: shaarli [-h] [-u URL] [-s SECRET] [--output {json,pprint,text}]
+   usage: shaarli [-h] [-c CONFIG] [-i INSTANCE] [-u URL] [-s SECRET]
+                  [--output {json,pprint,text}]
                   {get-info,get-links} ...
 
    positional arguments:
@@ -23,6 +24,10 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
 
    optional arguments:
      -h, --help            show this help message and exit
+     -c CONFIG, --config CONFIG
+                           Configuration file
+     -i INSTANCE, --instance INSTANCE
+                           Shaarli instance (configuration alias)
      -u URL, --url URL     Shaarli instance URL
      -s SECRET, --secret SECRET
                            API secret
@@ -62,12 +67,14 @@ General syntax
    $ shaarli <global arguments> <endpoint> <endpoint arguments>
 
 
+.. note:: The following examples assume a :doc:`configuration` file is used
+
 GET info
 ~~~~~~~~
 
 .. code-block:: bash
 
-   $ shaarli -u https://host.tld/shaarli/ -s s3kr37 --output pprint get-info
+   $ shaarli --output pprint get-info
 
    {
        "global_counter": 1502,
@@ -90,7 +97,7 @@ GET links
 
 .. code-block:: bash
 
-   $ shaarli -u https://host.tld/shaarli/ -s s3kr37 --output pprint get-links --searchtags super hero
+   $ shaarli --output pprint get-links --searchtags super hero
 
    [
        {
