@@ -17,6 +17,11 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 * Add client parameter checks and error handling
 * Read instance information from a configuration file
 
+**Changed:**
+
+* CLI: rename ``--output`` to ``--format``
+* CLI: default to 'pprint' output format
+
 
 `v0.1.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.1.0>`_ - 2017-03-12
 ---------------------------------------------------------------------------------------------

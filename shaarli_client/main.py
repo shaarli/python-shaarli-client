@@ -35,9 +35,9 @@ def main():
         help="API secret"
     )
     parser.add_argument(
-        '--output',
+        '--format',
         choices=['json', 'pprint', 'text'],
-        default='json',
+        default='pprint',
         help="Output formatting"
     )
 
@@ -59,11 +59,11 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    if args.output == 'json':
+    if args.format == 'json':
         print(response.json())
-    elif args.output == 'pprint':
+    elif args.format == 'pprint':
         print(json.dumps(response.json(), sort_keys=True, indent=4))
-    elif args.output == 'text':
+    elif args.format == 'text':
         print(response.text)
 
 

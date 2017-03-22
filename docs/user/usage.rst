@@ -14,7 +14,7 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
    $ shaarli -h
 
    usage: shaarli [-h] [-c CONFIG] [-i INSTANCE] [-u URL] [-s SECRET]
-                  [--output {json,pprint,text}]
+                  [--format {json,pprint,text}]
                   {get-info,get-links} ...
 
    positional arguments:
@@ -31,7 +31,7 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
      -u URL, --url URL     Shaarli instance URL
      -s SECRET, --secret SECRET
                            API secret
-     --output {json,pprint,text}
+     --format {json,pprint,text}
                            Output formatting
 
 
@@ -74,7 +74,7 @@ GET info
 
 .. code-block:: bash
 
-   $ shaarli --output pprint get-info
+   $ shaarli get-info
 
    {
        "global_counter": 1502,
@@ -97,7 +97,7 @@ GET links
 
 .. code-block:: bash
 
-   $ shaarli --output pprint get-links --searchtags super hero
+   $ shaarli get-links --searchtags super hero
 
    [
        {
