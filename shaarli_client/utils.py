@@ -9,14 +9,7 @@ def generate_endpoint_parser(subparsers, ep_name, ep_metadata):
         return ep_parser
 
     for param, attributes in sorted(ep_metadata['params'].items()):
-        ep_parser.add_argument(
-            '--%s' % param,
-            action=attributes.get('action'),
-            choices=attributes.get('choices'),
-            help=attributes.get('help'),
-            nargs=attributes.get('nargs'),
-            type=attributes.get('type')
-        )
+        ep_parser.add_argument('--%s' % param, **attributes)
 
     return ep_parser
 
