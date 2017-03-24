@@ -7,13 +7,13 @@ import requests
 from requests_jwt import JWTAuth
 
 
-class SearchFormatAction(Action):
-    """Format values for searching"""
+class TextFormatAction(Action):
+    """Format text fields"""
 
     # pylint: disable=too-few-public-methods
 
     def __call__(self, parser, namespace, values, option_string=None):
-        """Convert a list of strings to a search query string
+        """Convert a list of strings to a text string
 
         Source:           ["term1", "term2", "term3", ...]
         Formatted string: "term1 term2 term3 ..."
@@ -61,16 +61,44 @@ class ShaarliV1Client:
                 'searchtags': {
                     'help': "List of tags",
                     'nargs': '+',
-                    'action': SearchFormatAction,
+                    'action': TextFormatAction,
                 },
                 'searchterm': {
                     'help': "Search terms across all links fields",
                     'nargs': '+',
-                    'action': SearchFormatAction,
+                    'action': TextFormatAction,
                 },
                 'visibility': {
                     'choices': ['all', 'private', 'public'],
                     'help': "Filter links by visibility",
+                },
+            },
+        },
+        'post-link': {
+            'path': 'links',
+            'method': 'POST',
+            'help': "Create a new link or note",
+            'params': {
+                'description': {
+                    'action': TextFormatAction,
+                    'help': "Link description",
+                    'nargs': '+',
+                },
+                'private': {
+                    'action': 'store_true',
+                    'help': "Link visibility",
+                },
+                'tags': {
+                    'help': "List of tags associated with the link",
+                    'nargs': '+',
+                },
+                'title': {
+                    'action': TextFormatAction,
+                    'help': "Link title",
+                    'nargs': '+',
+                },
+                'url': {
+                    'help': "Link URL",
                 },
             },
         },
@@ -128,7 +156,15 @@ class ShaarliV1Client:
         auth.add_field('iat', lambda req: calendar.timegm(time.gmtime()))
 
         endpoint_uri = '%s/api/v%d/%s' % (self.uri, self.version, endpoint)
-        return requests.request(method, endpoint_uri, auth=auth, params=params)
+
+        if method == 'GET':
+            return requests.request(
+                method,
+                endpoint_uri,
+                auth=auth,
+                params=params
+            )
+        return requests.request(method, endpoint_uri, auth=auth, json=params)
 
     def request(self, args):
         """Send a parameterized request to this instance"""
@@ -142,3 +178,8 @@ class ShaarliV1Client:
         """Get a collection of links ordered by creation date"""
         self._check_endpoint_params('get-links', params)
         return self._request('GET', 'links', params)
+
+    def post_link(self, params):
+        """Create a new link or note"""
+        self._check_endpoint_params('post-links', params)
+        return self._request('POST', 'links', params)

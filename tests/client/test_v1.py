@@ -155,3 +155,45 @@ def test_retrieve_http_params_get_links_searchterm():
     )
     assert ShaarliV1Client._retrieve_http_params(args) == \
         ('GET', 'links', {'searchterm': 'gimme+some+results'})
+
+
+@mock.patch('requests.request')
+def test_post_links_uri(request):
+    """Ensure the proper endpoint URI is accessed"""
+    ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET).post_link({})
+    request.assert_called_once_with(
+        'POST',
+        '%s/api/v1/links' % SHAARLI_URL,
+        auth=mock.ANY,
+        json={}
+    )
+
+
+def test_retrieve_http_params_post_link():
+    """Retrieve REST parameters from an Argparse Namespace - POST /links"""
+    args = Namespace(
+        endpoint_name='post-link',
+        description="I am not a bookmark about a link.",
+        private=False,
+        tags=["nope", "4891"],
+        title="Ain't Talkin' 'bout Links",
+        url='https://aint.talkin.bout.lin.ks'
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        (
+            'POST',
+            'links',
+            {
+                'description': "I am not a bookmark about a link.",
+                'private': False,
+                'tags': ["nope", "4891"],
+                'title': "Ain't Talkin' 'bout Links",
+                'url': 'https://aint.talkin.bout.lin.ks'
+            }
+        )
+
+
+def test_retrieve_http_params_post_empty_link():
+    """Retrieve REST parameters from an Argparse Namespace - POST /links"""
+    args = Namespace(endpoint_name='post-link')
+    assert ShaarliV1Client._retrieve_http_params(args) == ('POST', 'links', {})
