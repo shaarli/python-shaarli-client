@@ -61,14 +61,7 @@ def test_generate_endpoint_parser_single_param(addargument):
                   default=mock.ANY, help=mock.ANY),
 
         # param1
-        mock.call(
-            '--param1',
-            action=None,
-            choices=None,
-            help="First param",
-            nargs=None,
-            type=None
-        )
+        mock.call('--param1', help="First param")
     ])
 
 
@@ -107,10 +100,9 @@ def test_generate_endpoint_parser_multi_param(addargument):
                   default=mock.ANY, help=mock.ANY),
 
         # param1
-        mock.call('--param1', action=None, choices=None,
-                  help="First param", nargs=None, type=int),
+        mock.call('--param1', help="First param", type=int),
 
         # param2
-        mock.call('--param2', action=None, choices=['a', 'b', 'c'],
-                  help="Second param", nargs='+', type=None)
+        mock.call('--param2', choices=['a', 'b', 'c'],
+                  help="Second param", nargs='+')
     ])

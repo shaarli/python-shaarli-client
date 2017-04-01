@@ -16,11 +16,17 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 
 * Add client parameter checks and error handling
 * Read instance information from a configuration file
+* REST API client:
+
+  * ``POST api/v1/links``
 
 **Changed:**
 
-* CLI: rename ``--output`` to ``--format``
-* CLI: default to 'pprint' output format
+* CLI:
+
+  * rename ``--output`` to ``--format``
+  * default to 'pprint' output format
+  * improve endpoint-specific parser argument generation
 
 
 `v0.1.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.1.0>`_ - 2017-03-12
@@ -42,5 +48,5 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 * Travis CI configuration
 * REST API client:
 
-  * ``/api/v1/info``
-  * ``/api/v1/links``
+  * ``GET /api/v1/info``
+  * ``GET /api/v1/links``
