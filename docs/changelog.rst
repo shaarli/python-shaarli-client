@@ -27,6 +27,7 @@ The format is based on `Keep a Changelog`_ and this project adheres to
   * rename ``--output`` to ``--format``
   * default to 'pprint' output format
   * improve endpoint-specific parser argument generation
+  * improve exception handling and logging
 
 
 `v0.1.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.1.0>`_ - 2017-03-12
