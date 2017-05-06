@@ -1,10 +1,23 @@
 """Shaarli REST API v1 client"""
 import calendar
 import time
-from argparse import Action
+from argparse import Action, ArgumentTypeError
 
 import requests
 from requests_jwt import JWTAuth
+
+
+def check_positive_integer(value):
+    """Ensure a value is a positive integer"""
+    try:
+        intval = int(value)
+    except ValueError:
+        raise ArgumentTypeError("%s is not a positive integer" % value)
+
+    if intval < 0:
+        raise ArgumentTypeError("%s is not a positive integer" % value)
+
+    return intval
 
 
 class TextFormatAction(Action):
@@ -102,6 +115,38 @@ class ShaarliV1Client:
                 },
             },
         },
+        'put-link': {
+            'path': 'links',
+            'method': 'PUT',
+            'help': "Update an existing link or note",
+            'resource': {
+                'help': "Link ID",
+                'type': check_positive_integer,
+            },
+            'params': {
+                'description': {
+                    'action': TextFormatAction,
+                    'help': "Link description",
+                    'nargs': '+',
+                },
+                'private': {
+                    'action': 'store_true',
+                    'help': "Link visibility",
+                },
+                'tags': {
+                    'help': "List of tags associated with the link",
+                    'nargs': '+',
+                },
+                'title': {
+                    'action': TextFormatAction,
+                    'help': "Link title",
+                    'nargs': '+',
+                },
+                'url': {
+                    'help': "Link URL",
+                },
+            },
+        },
     }
 
     def __init__(self, uri, secret):
@@ -139,8 +184,13 @@ class ShaarliV1Client:
         """
         endpoint = cls.endpoints[args.endpoint_name]
 
+        if not endpoint.get('resource'):
+            path = endpoint['path']
+        else:
+            path = '%s/%d' % (endpoint['path'], args.resource)
+
         if not endpoint.get('params'):
-            return (endpoint['method'], endpoint['path'], {})
+            return (endpoint['method'], path, {})
 
         params = {
             param: getattr(args, param)
@@ -148,7 +198,7 @@ class ShaarliV1Client:
             if hasattr(args, param)
         }
 
-        return (endpoint['method'], endpoint['path'], params)
+        return (endpoint['method'], path, params)
 
     def _request(self, method, endpoint, params):
         """Send an HTTP request to this instance"""
@@ -183,3 +233,8 @@ class ShaarliV1Client:
         """Create a new link or note"""
         self._check_endpoint_params('post-links', params)
         return self._request('POST', 'links', params)
+
+    def put_link(self, resource, params):
+        """Update an existing link or note"""
+        self._check_endpoint_params('put-links', params)
+        return self._request('PUT', 'links/%d' % resource, params)

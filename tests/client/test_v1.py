@@ -1,15 +1,37 @@
 """Tests for Shaarli REST API v1 client"""
 # pylint: disable=invalid-name,protected-access
-from argparse import Namespace
+from argparse import ArgumentTypeError, Namespace
 from unittest import mock
 
 import pytest
 from requests.exceptions import InvalidSchema, MissingSchema
 
-from shaarli_client.client import InvalidEndpointParameters, ShaarliV1Client
+from shaarli_client.client.v1 import (InvalidEndpointParameters,
+                                      ShaarliV1Client,
+                                      check_positive_integer)
 
 SHAARLI_URL = 'http://domain.tld/shaarli'
 SHAARLI_SECRET = 's3kr37!'
+
+
+def test_check_positive_integer():
+    """A posivite integer is a positive integer"""
+    assert check_positive_integer('0') == 0
+    assert check_positive_integer('2378') == 2378
+
+
+def test_check_positive_integer_negative():
+    """A negative integer is not a positive integer"""
+    with pytest.raises(ArgumentTypeError) as exc:
+        check_positive_integer('-123')
+    assert 'not a positive integer' in str(exc.value)
+
+
+def test_check_positive_integer_alpha():
+    """An alphanumeric string is not a positive integer"""
+    with pytest.raises(ArgumentTypeError) as exc:
+        check_positive_integer('abc123')
+    assert 'not a positive integer' in str(exc.value)
 
 
 def test_invalid_endpoint_parameters_exception():
@@ -197,3 +219,50 @@ def test_retrieve_http_params_post_empty_link():
     """Retrieve REST parameters from an Argparse Namespace - POST /links"""
     args = Namespace(endpoint_name='post-link')
     assert ShaarliV1Client._retrieve_http_params(args) == ('POST', 'links', {})
+
+
+@mock.patch('requests.request')
+def test_put_links_uri(request):
+    """Ensure the proper endpoint URI is accessed"""
+    ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET).put_link(12, {})
+    request.assert_called_once_with(
+        'PUT',
+        '%s/api/v1/links/12' % SHAARLI_URL,
+        auth=mock.ANY,
+        json={}
+    )
+
+
+def test_retrieve_http_params_put_link():
+    """Retrieve REST parameters from an Argparse Namespace - PUT /links"""
+    args = Namespace(
+        resource=46,
+        endpoint_name='put-link',
+        description="I am not a bookmark about a link.",
+        private=False,
+        tags=["nope", "4891"],
+        title="Ain't Talkin' 'bout Links",
+        url='https://aint.talkin.bout.lin.ks'
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        (
+            'PUT',
+            'links/46',
+            {
+                'description': "I am not a bookmark about a link.",
+                'private': False,
+                'tags': ["nope", "4891"],
+                'title': "Ain't Talkin' 'bout Links",
+                'url': 'https://aint.talkin.bout.lin.ks'
+            }
+        )
+
+
+def test_retrieve_http_params_put_empty_link():
+    """Retrieve REST parameters from an Argparse Namespace - PUT /links"""
+    args = Namespace(
+        resource=485,
+        endpoint_name='put-link'
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        ('PUT', 'links/485', {})
