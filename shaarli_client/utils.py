@@ -5,6 +5,9 @@ def generate_endpoint_parser(subparsers, ep_name, ep_metadata):
     """Generate a subparser and arguments from an endpoint dictionary"""
     ep_parser = subparsers.add_parser(ep_name, help=ep_metadata['help'])
 
+    if ep_metadata.get('resource'):
+        ep_parser.add_argument('resource', **ep_metadata.get('resource'))
+
     if not ep_metadata.get('params'):
         return ep_parser
 

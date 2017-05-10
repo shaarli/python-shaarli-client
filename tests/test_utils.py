@@ -106,3 +106,36 @@ def test_generate_endpoint_parser_multi_param(addargument):
         mock.call('--param2', choices=['a', 'b', 'c'],
                   help="Second param", nargs='+')
     ])
+
+
+@mock.patch('argparse.ArgumentParser.add_argument')
+def test_generate_endpoint_parser_resource(addargument):
+    """Generate a parser from endpoint metadata - API resource"""
+    name = 'get-stuff'
+    metadata = {
+        'path': 'stuff',
+        'method': 'GET',
+        'help': "Gets stuff",
+        'resource': {
+            'help': "API resource",
+            'type': int,
+        },
+        'params': {},
+    }
+    parser = ArgumentParser()
+    subparsers = parser.add_subparsers()
+
+    generate_endpoint_parser(subparsers, name, metadata)
+
+    addargument.assert_has_calls([
+        # first helper for the main parser
+        mock.call('-h', '--help', action='help',
+                  default=mock.ANY, help=mock.ANY),
+
+        # second helper for the 'put-stuff' subparser
+        mock.call('-h', '--help', action='help',
+                  default=mock.ANY, help=mock.ANY),
+
+        # resource
+        mock.call('resource', help="API resource", type=int)
+    ])

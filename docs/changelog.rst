@@ -12,6 +12,17 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `v0.3.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.3.0>`_ - UNPUBLISHED
 ----------------------------------------------------------------------------------------------
 
+**Added:**
+
+* CLI:
+
+  * Add support for endpoint resource(s)
+
+* REST API client:
+
+  * ``PUT api/v1/links/<LINK_ID>``
+
+
 `v0.2.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.2.0>`_ - 2017-04-09
 ---------------------------------------------------------------------------------------------
 
