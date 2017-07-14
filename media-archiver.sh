@@ -48,18 +48,16 @@ exportfile="${outdir}/shaarli.export" # Write plain text
 logfile="${outdir}/youtube-dl.log" # Archiver log file location
 blacklist="${outdir}/youtube-dl.blacklist" # URLs listed there will not be downloaded
 youtube_dl_extra_options="--no-playlist --add-metadata" # Extra options for youtube-dl
+wait_time="1" # time to wait between requests
 
 ###################
 
-#function install {
-#python3 -m venv venv
-#source venv/bin/activate
-## install from source
-#python setup.py install
-## install from pip (disabled)
-##pip install shaarli-client
-#pip freeze
-#}
+function _install {
+python3 -m venv venv
+source venv/bin/activate
+python setup.py install
+pip freeze
+}
 
 #################
 
@@ -87,6 +85,7 @@ function _download_music_links {
 			"$url" \
 			--output 'music/%(title)s-%(extractor)s-%(id)s.%(ext)s' 2>&1 | tee -a "$logfile"
 		fi
+		sleep "$wait_time"
 	done
 }
 
@@ -105,6 +104,7 @@ function _warn_on_errors {
 if [ ! -d "$outdir" ]; then mkdir -p "$outdir"; fi
 date | tee -a "$logfile"
 
+_install
 _export_music_links
 _download_music_links
 _warn_on_errors
