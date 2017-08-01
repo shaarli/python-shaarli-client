@@ -81,6 +81,7 @@ function _download_music_links {
 			youtube-dl \
 			$youtube_dl_extra_options \
 			--extract-audio \
+			--audio-format best \
 			--download-archive music/youtube-dl.archive \
 			"$url" \
 			--output 'music/%(title)s-%(extractor)s-%(id)s.%(ext)s' 2>&1 | tee -a "$logfile"
