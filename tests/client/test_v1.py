@@ -4,11 +4,11 @@ from argparse import ArgumentTypeError, Namespace
 from unittest import mock
 
 import pytest
+
 from requests.exceptions import InvalidSchema, MissingSchema
 
 from shaarli_client.client.v1 import (InvalidEndpointParameters,
-                                      ShaarliV1Client,
-                                      check_positive_integer)
+                                      ShaarliV1Client, check_positive_integer)
 
 SHAARLI_URL = 'http://domain.tld/shaarli'
 SHAARLI_SECRET = 's3kr37!'
