@@ -4,7 +4,6 @@ import time
 from argparse import Action, ArgumentTypeError
 
 import requests
-
 from requests_jwt import JWTAuth
 
 
