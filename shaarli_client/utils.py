@@ -40,6 +40,5 @@ def write_output(filename, output):
     try:
         with open(filename, 'w') as outfile_handler:
             outfile_handler.write(output)
-            outfile_handler.close()
     except OSError:
         raise OSError("Unable to write output file %s" % filename)
