@@ -32,8 +32,7 @@ def format_response(output_format, response):
         return json.dumps(response.json(), sort_keys=True, indent=4)
     elif output_format == 'text':
         return response.text
-    else:
-        raise ValueError("%s is not a supported format." % output_format)
+    raise ValueError("%s is not a supported format." % output_format)
 
 
 def write_output(filename, output):
