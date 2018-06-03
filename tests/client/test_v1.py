@@ -265,3 +265,102 @@ def test_retrieve_http_params_put_empty_link():
     )
     assert ShaarliV1Client._retrieve_http_params(args) == \
         ('PUT', 'links/485', {})
+
+
+def test_retrieve_http_params_get_tags():
+    """Retrieve REST parameters from an Argparse Namespace - GET /tags"""
+    args = Namespace(
+        endpoint_name='get-tags',
+        offset=42,
+        limit='all',
+        visibility='public'
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        ('GET', 'tags', {'offset': 42, 'limit': 'all', 'visibility': 'public'})
+
+
+@mock.patch('requests.request')
+def test_get_tags_uri(request):
+    """Ensure the proper endpoint URI is accessed"""
+    ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET).get_tags({})
+    request.assert_called_once_with(
+        'GET',
+        '%s/api/v1/tags' % SHAARLI_URL,
+        auth=mock.ANY,
+        params={}
+    )
+
+
+@mock.patch('requests.request')
+def test_put_tags_uri(request):
+    """Ensure the proper endpoint URI is accessed"""
+    ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET).put_tag('some-tag', {})
+    request.assert_called_once_with(
+        'PUT',
+        '%s/api/v1/tags/some-tag' % SHAARLI_URL,
+        auth=mock.ANY,
+        json={}
+    )
+
+
+def test_retrieve_http_params_put_tag():
+    """Retrieve REST parameters from an Argparse Namespace - PUT /tags"""
+    args = Namespace(
+        resource='some-tag',
+        endpoint_name='put-tag',
+        name='new-tag',
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        (
+            'PUT',
+            'tags/some-tag',
+            {
+                'name': 'new-tag',
+            }
+        )
+
+
+def test_retrieve_http_params_put_empty_tag():
+    """Retrieve REST parameters from an Argparse Namespace - PUT /tags"""
+    args = Namespace(
+        resource='some-tag',
+        endpoint_name='put-tag'
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        ('PUT', 'tags/some-tag', {})
+
+
+@mock.patch('requests.request')
+def test_delete_tags_uri(request):
+    """Ensure the proper endpoint URI is accessed"""
+    ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET).delete_tag('some-tag', {})
+    request.assert_called_once_with(
+        'DELETE',
+        '%s/api/v1/tags/some-tag' % SHAARLI_URL,
+        auth=mock.ANY,
+        json={}
+    )
+
+
+def test_retrieve_http_params_delete_tag():
+    """Retrieve REST parameters from an Argparse Namespace - DELETE /tags"""
+    args = Namespace(
+        resource='some-tag',
+        endpoint_name='delete-tag',
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        (
+            'DELETE',
+            'tags/some-tag',
+            {}
+        )
+
+
+def test_retrieve_http_params_delete_empty_tag():
+    """Retrieve REST parameters from an Argparse Namespace - DELETE /tags"""
+    args = Namespace(
+        resource='some-tag',
+        endpoint_name='delete-tag'
+    )
+    assert ShaarliV1Client._retrieve_http_params(args) == \
+        ('DELETE', 'tags/some-tag', {})

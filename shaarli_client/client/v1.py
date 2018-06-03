@@ -147,6 +147,52 @@ class ShaarliV1Client:
                 },
             },
         },
+        'get-tags': {
+            'path': 'tags',
+            'method': 'GET',
+            'help': "Get all tags",
+            'params': {
+                'offset': {
+                    'help': "Offset from which to start listing tags",
+                    'type': int,
+                },
+                'limit': {
+                    'help': "Number of tags to retrieve or 'all'",
+                },
+                'visibility': {
+                    'choices': ['all', 'private', 'public'],
+                },
+            },
+        },
+        'get-tag': {
+            'path': 'tags',
+            'method': 'GET',
+            'help': "Get a single tag",
+            'resource': {
+                'help': "Tag name (case-sensitive))",
+            },
+        },
+        'put-tag': {
+            'path': 'tags',
+            'method': 'PUT',
+            'help': "Rename an existing tag",
+            'resource': {
+                'help': "Tag name (case-sensitive)",
+            },
+            'params': {
+                'name': {
+                    'help': "New tag name",
+                },
+            },
+        },
+        'delete-tag': {
+            'path': 'tags',
+            'method': 'DELETE',
+            'help': "Delete a tag from every link where it is used",
+            'resource': {
+                'help': "Tag name (case-sensitive)",
+            },
+        },
     }
 
     def __init__(self, uri, secret):
@@ -187,7 +233,7 @@ class ShaarliV1Client:
         if not endpoint.get('resource'):
             path = endpoint['path']
         else:
-            path = '%s/%d' % (endpoint['path'], args.resource)
+            path = '%s/%s' % (endpoint['path'], args.resource)
 
         if not endpoint.get('params'):
             return (endpoint['method'], path, {})
@@ -238,3 +284,23 @@ class ShaarliV1Client:
         """Update an existing link or note"""
         self._check_endpoint_params('put-links', params)
         return self._request('PUT', 'links/%d' % resource, params)
+
+    def get_tags(self, params):
+        """Get a list of all tags"""
+        self._check_endpoint_params('get-tags', params)
+        return self._request('GET', 'tags', params)
+
+    def get_tag(self, resource, params):
+        """Get a single tag"""
+        self._check_endpoint_params('get-tag', params)
+        return self._request('GET', 'tags/%s' % resource, params)
+
+    def put_tag(self, resource, params):
+        """Rename an existing tag"""
+        self._check_endpoint_params('put-tag', params)
+        return self._request('PUT', 'tags/%s' % resource, params)
+
+    def delete_tag(self, resource, params):
+        """Delete a tag"""
+        self._check_endpoint_params('delete-tag', params)
+        return self._request('DELETE', 'tags/%s' % resource, params)
