@@ -15,12 +15,20 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
 
    usage: shaarli [-h] [-c CONFIG] [-i INSTANCE] [-u URL] [-s SECRET]
                   [--format {json,pprint,text}]
-                  {get-info,get-links} ...
+                  {get-info,get-links,post-link,put-link,get-tags,get-tag,put-tag,delete-tag}
+                  ...
 
    positional arguments:
-     {get-info,get-links}  REST API endpoint
+     {get-info,get-links,post-link,put-link,get-tags,get-tag,put-tag,delete-tag}
+                           REST API endpoint
        get-info            Get information about this instance
        get-links           Get a collection of links ordered by creation date
+       post-link           Create a new link or note
+       put-link            Update an existing link or note
+       get-tags            Get all tags
+       get-tag             Get a single tag
+       put-tag             Rename an existing tag
+       delete-tag          Delete a tag from every link where it is used
 
    optional arguments:
      -h, --help            show this help message and exit
@@ -76,6 +84,9 @@ GET info
 
    $ shaarli get-info
 
+
+.. code-block:: json
+
    {
        "global_counter": 1502,
        "private_counter": 5,
@@ -98,6 +109,9 @@ GET links
 .. code-block:: bash
 
    $ shaarli get-links --searchtags super hero
+
+
+.. code-block:: json
 
    [
        {
@@ -139,3 +153,115 @@ GET links
            "url": "http://mashable.com/2014/05/01/spider-man-costume"
        }
    ]
+
+
+POST link
+~~~~~~~~~
+
+.. code-block:: bash
+
+   $ shaarli post-link --url https://w3c.github.io/activitypub/
+
+
+.. code-block:: json
+
+   {
+       "created": "2018-06-04T20:35:12+00:00",
+       "description": "",
+       "id": 3252,
+       "private": false,
+       "shorturl": "kMkHHQ",
+       "tags": [],
+       "title": "https://w3c.github.io/activitypub/",
+       "updated": "",
+       "url": "https://w3c.github.io/activitypub/"
+   }
+
+
+PUT link
+~~~~~~~~
+
+.. code-block:: bash
+
+   shaarli put-link --private 3252
+
+
+.. code-block:: json
+
+   {
+       "created": "2018-06-04T20:35:12+00:00",
+       "description": "",
+       "id": 3252,
+       "private": true,
+       "shorturl": "kMkHHQ",
+       "tags": [],
+       "title": "?kMkHHQ",
+       "updated": "2018-06-04T21:57:44+00:00",
+       "url": "http://aaron.localdomain/~virtualtam/shaarli/?kMkHHQ"
+   }
+
+
+GET tags
+~~~~~~~~
+
+.. code-block:: bash
+
+   $ shaarli get-tags --limit 5
+
+
+.. code-block:: json
+
+   [
+       {
+           "name": "bananas",
+           "occurrences": 312
+       },
+       {
+           "name": "snakes",
+           "occurrences": 247
+       },
+       {
+           "name": "ladders",
+           "occurrences": 240
+       },
+       {
+           "name": "submarines",
+           "occurrences": 48
+       },
+       {
+           "name": "yellow",
+           "occurrences": 27
+       }
+   ]
+
+
+GET tag
+~~~~~~~
+
+.. code-block:: bash
+
+   $ shaarli get-tag bananas
+
+
+.. code-block:: json
+
+   {
+       "name": "bananas",
+       "occurrences": 312
+   }
+
+
+PUT tag
+~~~~~~~
+
+.. code-block:: bash
+
+   $ shaarli put-tag w4c --name w3c
+
+
+.. code-block:: json
+
+   {
+       "name": "w3c",
+       "occurrences": 5
+   }
