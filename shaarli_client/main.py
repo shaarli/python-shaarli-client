@@ -58,6 +58,7 @@ def main():
         response = ShaarliV1Client(url, secret).request(args)
     except InvalidConfiguration as exc:
         logging.error(exc)
+        parser.print_help()
         sys.exit(1)
     except (KeyError, TypeError, ValueError) as exc:
         logging.error(exc)
