@@ -39,8 +39,10 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
      -u URL, --url URL     Shaarli instance URL
      -s SECRET, --secret SECRET
                            API secret
-     --format {json,pprint,text}
+     -f --format {json,pprint,text}
                            Output formatting
+     -o --outfile FILENAME
+                           File to save the program output to
 
 
 .. code-block:: bash

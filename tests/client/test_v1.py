@@ -5,7 +5,6 @@ from unittest import mock
 
 import pytest
 from requests.exceptions import InvalidSchema, MissingSchema
-
 from shaarli_client.client.v1 import (InvalidEndpointParameters,
                                       ShaarliV1Client, check_positive_integer)
 

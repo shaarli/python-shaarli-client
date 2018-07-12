@@ -1,4 +1,5 @@
 """Utilities"""
+import json
 
 
 def generate_endpoint_parser(subparsers, ep_name, ep_metadata):
@@ -21,3 +22,23 @@ def generate_all_endpoints_parsers(subparsers, endpoints):
     """Generate all endpoints' subparsers from an endpoints dict"""
     for ep_name, ep_metadata in endpoints.items():
         generate_endpoint_parser(subparsers, ep_name, ep_metadata)
+
+
+def format_response(output_format, response):
+    """Format the API response to the desired output format"""
+    if output_format == 'json':
+        return response.json()
+    elif output_format == 'pprint':
+        return json.dumps(response.json(), sort_keys=True, indent=4)
+    elif output_format == 'text':
+        return response.text
+    raise ValueError("%s is not a supported format." % output_format)
+
+
+def write_output(filename, output):
+    """Write the program output to a file"""
+    try:
+        with open(filename, 'w') as outfile_handler:
+            outfile_handler.write(output)
+    except OSError:
+        raise OSError("Unable to write output file %s" % filename)

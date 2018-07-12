@@ -4,7 +4,6 @@ from argparse import Namespace
 from configparser import ConfigParser
 
 import pytest
-
 from shaarli_client.config import InvalidConfiguration, get_credentials
 
 SHAARLI_URL = 'http://shaar.li'

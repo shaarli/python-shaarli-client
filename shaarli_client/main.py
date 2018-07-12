@@ -1,12 +1,11 @@
 """shaarli-client main CLI entrypoint"""
-import json
 import logging
 import sys
 from argparse import ArgumentParser
 
 from .client import ShaarliV1Client
 from .config import InvalidConfiguration, get_credentials
-from .utils import generate_all_endpoints_parsers
+from .utils import format_response, generate_all_endpoints_parsers, write_output
 
 
 def main():
@@ -33,10 +32,16 @@ def main():
         help="API secret"
     )
     parser.add_argument(
+        '-f',
         '--format',
         choices=['json', 'pprint', 'text'],
         default='pprint',
         help="Output formatting"
+    )
+    parser.add_argument(
+        '-o',
+        '--outfile',
+        help="File to save the program output to"
     )
 
     subparsers = parser.add_subparsers(
@@ -59,9 +64,8 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    if args.format == 'json':
-        print(response.json())
-    elif args.format == 'pprint':
-        print(json.dumps(response.json(), sort_keys=True, indent=4))
-    elif args.format == 'text':
-        print(response.text)
+    output = format_response(args.format, response)
+    if not args.outfile:
+        print(output)
+    else:
+        write_output(args.outfile, output)
