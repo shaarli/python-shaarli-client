@@ -4,6 +4,7 @@ import json
 from argparse import ArgumentParser
 from unittest import mock
 
+import pytest
 from requests import Response
 
 from shaarli_client.utils import format_response, generate_endpoint_parser
@@ -142,6 +143,24 @@ def test_generate_endpoint_parser_resource(addargument):
         # resource
         mock.call('resource', help="API resource", type=int)
     ])
+
+
+def test_format_response_unsupported_format():
+    """Attempt to use an unsupported formatting flag"""
+    response = Response()
+    response.__setstate__({'_content': b'{"field":"value"}'})
+
+    with pytest.raises(ValueError) as err:
+        format_response('xml', response)
+
+    assert "not a supported format" in str(err.value)
+
+
+@pytest.mark.parametrize('output_format', ['json', 'pprint', 'text'])
+def test_format_response_empty_body(output_format):
+    """Format a Requests Response object with no body"""
+    response = Response()
+    assert format_response(output_format, response) == ''
 
 
 def test_format_response_text():

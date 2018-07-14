@@ -26,13 +26,18 @@ def generate_all_endpoints_parsers(subparsers, endpoints):
 
 def format_response(output_format, response):
     """Format the API response to the desired output format"""
-    if output_format == 'json':
-        return json.dumps(response.json())
+    if not response.content:
+        formatted = ''
+    elif output_format == 'json':
+        formatted = json.dumps(response.json())
     elif output_format == 'pprint':
-        return json.dumps(response.json(), sort_keys=True, indent=4)
+        formatted = json.dumps(response.json(), sort_keys=True, indent=4)
     elif output_format == 'text':
-        return response.text
-    raise ValueError("%s is not a supported format." % output_format)
+        formatted = response.text
+    else:
+        raise ValueError("%s is not a supported format." % output_format)
+
+    return formatted
 
 
 def write_output(filename, output):
