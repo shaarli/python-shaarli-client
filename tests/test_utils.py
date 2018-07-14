@@ -1,9 +1,12 @@
 """Tests for Shaarli client utilities"""
 # pylint: disable=invalid-name
+import json
 from argparse import ArgumentParser
 from unittest import mock
 
-from shaarli_client.utils import generate_endpoint_parser
+from requests import Response
+
+from shaarli_client.utils import format_response, generate_endpoint_parser
 
 
 @mock.patch('argparse.ArgumentParser.add_argument')
@@ -139,3 +142,43 @@ def test_generate_endpoint_parser_resource(addargument):
         # resource
         mock.call('resource', help="API resource", type=int)
     ])
+
+
+def test_format_response_text():
+    """Format a Requests Response object to plain text"""
+    response = Response()
+    response.__setstate__({
+        '_content': b'{"global_counter":3251,'
+                    b'"private_counter":1,'
+                    b'"settings":{"title":"Yay!","header_link":"?",'
+                    b'"timezone":"UTC",'
+                    b'"enabled_plugins":["qrcode","token"],'
+                    b'"default_private_links":false}}',
+    })
+
+    assert isinstance(response.text, str)
+    assert response.text == '{"global_counter":3251,' \
+                            '"private_counter":1,' \
+                            '"settings":{"title":"Yay!","header_link":"?",' \
+                            '"timezone":"UTC",' \
+                            '"enabled_plugins":["qrcode","token"],' \
+                            '"default_private_links":false}}'
+
+
+def test_format_response_json():
+    """Format a Requests Response object to JSON"""
+    response = Response()
+    response.__setstate__({
+        '_content': b'{"global_counter":3251,'
+                    b'"private_counter":1,'
+                    b'"settings":{"title":"Yay!","header_link":"?",'
+                    b'"timezone":"UTC",'
+                    b'"enabled_plugins":["qrcode","token"],'
+                    b'"default_private_links":false}}',
+    })
+
+    assert isinstance(response.json(), dict)
+
+    # Ensure valid JSON is returned after formatting
+    assert json.loads(format_response('json', response))
+    assert json.loads(format_response('pprint', response))
