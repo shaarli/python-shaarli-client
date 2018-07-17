@@ -7,12 +7,6 @@ and above and has been tested on Linux.
 From the Python Package Index (PyPI)
 ------------------------------------
 
-To install ``shaarli-client`` with `pip <http://pip.readthedocs.org/en/stable/quickstart/>`_:
-
-.. code-block:: bash
-
-  $ pip install shaarli-client
-
 The preferred way of installing ``shaarli-client`` is within a Python `virtualenv`_;
 you might want to use a wrapper such as `virtualenvwrapper`_ or `pew`_ for convenience.
 
@@ -40,8 +34,8 @@ Here is an example using a Python 3.5 interpreter:
   requests-jwt==0.4
   shaarli-client==0.1.0
 
-Get the source code
--------------------
+From the source code
+--------------------
 
 To get ``shaarli-client`` sources and install it in a new `virtualenv`_:
 
