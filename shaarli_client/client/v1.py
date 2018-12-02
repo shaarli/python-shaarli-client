@@ -277,7 +277,7 @@ class ShaarliV1Client:
 
     def post_link(self, params):
         """Create a new link or note"""
-        self._check_endpoint_params('post-links', params)
+        self._check_endpoint_params('post-link', params)
         return self._request('POST', 'links', params)
 
     def put_link(self, resource, params):
