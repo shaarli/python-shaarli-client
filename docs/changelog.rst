@@ -23,6 +23,11 @@ The format is based on `Keep a Changelog`_ and this project adheres to
   * ``PUT api/v1/links/<LINK_ID>``
 
 
+**Fixed:**
+
+* Use requests-jwt < 0.5
+
+
 `v0.2.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.2.0>`_ - 2017-04-09
 ---------------------------------------------------------------------------------------------
 

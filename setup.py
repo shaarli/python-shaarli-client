@@ -41,7 +41,7 @@ setup(
     },
     install_requires=[
         'requests >= 2.10',
-        'requests-jwt >= 0.4'
+        'requests-jwt >= 0.4, < 0.5'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
