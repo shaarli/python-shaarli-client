@@ -1,5 +1,6 @@
 """Utilities"""
 import json
+import subprocess
 
 
 def generate_endpoint_parser(subparsers, ep_name, ep_metadata):
@@ -38,6 +39,19 @@ def format_response(output_format, response):
         raise ValueError("%s is not a supported format." % output_format)
 
     return formatted
+
+
+def download_audio(response):
+    """Download and extract audio from returned links using youtube-dl"""
+    data=json.loads(format_response('json', response))
+    print(type(data))
+    numlinks = len(data)
+    index = 0
+    while index < numlinks:
+        url = data[index]['url']
+        print("[shaarli] INFO: downloading %s" % url)
+        subprocess.run(['youtube-dl', '--extract-audio', '--audio-format', 'mp3', url])
+        index += 1
 
 
 def write_output(filename, output):

@@ -5,16 +5,25 @@ from argparse import ArgumentParser
 
 from .client import ShaarliV1Client
 from .config import InvalidConfiguration, get_credentials
-from .utils import format_response, generate_all_endpoints_parsers, write_output
+from .utils import download_audio, format_response, generate_all_endpoints_parsers, write_output
 
 
 def main():
     """Main CLI entrypoint"""
+    # https://docs.python.org/3/library/argparse.html
     parser = ArgumentParser()
     parser.add_argument(
         '-c',
         '--config',
         help="Configuration file"
+    )
+    parser.add_argument(
+        '--download-audio',
+        action='store_const',
+        default=False,
+        const=True,
+        dest="downloadaudio",
+        help="Download audio from returned links using youtube-dl"
     )
     parser.add_argument(
         '-i',
@@ -69,3 +78,6 @@ def main():
         print(output)
     else:
         write_output(args.outfile, output)
+
+    if args.downloadaudio:
+        download_audio(response)
