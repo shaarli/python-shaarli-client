@@ -5,7 +5,8 @@ from argparse import ArgumentParser
 
 from .client import ShaarliV1Client
 from .config import InvalidConfiguration, get_credentials
-from .utils import download_audio, format_response, generate_all_endpoints_parsers, write_output
+from .utils import (download_audio, format_response,
+                    generate_all_endpoints_parsers, write_output)
 
 
 def main():
