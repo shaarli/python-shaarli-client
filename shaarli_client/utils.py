@@ -43,14 +43,16 @@ def format_response(output_format, response):
 
 def download_audio(response):
     """Download and extract audio from returned links using youtube-dl"""
-    data=json.loads(format_response('json', response))
+    data = json.loads(format_response('json', response))
     print(type(data))
     numlinks = len(data)
     index = 0
     while index < numlinks:
         url = data[index]['url']
         print("[shaarli] INFO: downloading %s" % url)
-        subprocess.run(['youtube-dl', '--extract-audio', '--audio-format', 'mp3', url])
+        subprocess.run(['youtube-dl',
+                        '--extract-audio', '--audio-format', 'mp3',
+                        url])
         index += 1
 
 
