@@ -267,3 +267,13 @@ PUT tag
        "name": "w3c",
        "occurrences": 5
    }
+
+
+New lines/line breaks
+~~~~~~~~~~~~~~~~~~~~~
+
+If you need to include line breaks in your descriptions, use a literal newline ``\n`` and **single quotes** around the description:
+
+.. code-block:: bash
+
+    $ shaarli post-link --url https://example.com/ --description 'One\nword\nper\nline'.
