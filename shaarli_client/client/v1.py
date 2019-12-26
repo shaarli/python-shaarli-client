@@ -282,7 +282,7 @@ class ShaarliV1Client:
 
     def put_link(self, resource, params):
         """Update an existing link or note"""
-        self._check_endpoint_params('put-links', params)
+        self._check_endpoint_params('put-link', params)
         return self._request('PUT', 'links/%d' % resource, params)
 
     def get_tags(self, params):
