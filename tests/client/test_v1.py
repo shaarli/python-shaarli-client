@@ -4,7 +4,7 @@ from argparse import ArgumentTypeError, Namespace
 from unittest import mock
 
 import pytest
-from requests.exceptions import InvalidSchema, MissingSchema
+from requests.exceptions import InvalidSchema, InvalidURL, MissingSchema
 
 from shaarli_client.client.v1 import (InvalidEndpointParameters,
                                       ShaarliV1Client, check_positive_integer)
@@ -126,7 +126,7 @@ def test_get_info_uri(request):
 
 @pytest.mark.parametrize('uri, klass, msg', [
     ('shaarli', MissingSchema, "No schema supplied"),
-    ('http:/shaarli', MissingSchema, "No schema supplied"),
+    ('http:/shaarli', InvalidURL, "No host supplied"),
     ('htp://shaarli', InvalidSchema, "No connection adapters"),
 ])
 def test_get_info_invalid_uri(uri, klass, msg):
