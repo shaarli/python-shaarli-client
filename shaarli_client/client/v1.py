@@ -246,7 +246,7 @@ class ShaarliV1Client:
 
         return (endpoint['method'], path, params)
 
-    def _request(self, method, endpoint, params):
+    def _request(self, method, endpoint, params, verify_certs):
         """Send an HTTP request to this instance"""
         auth = JWTAuth(self.secret, alg='HS512', header_format='Bearer %s')
         auth.add_field('iat', lambda req: calendar.timegm(time.gmtime()))
@@ -258,13 +258,15 @@ class ShaarliV1Client:
                 method,
                 endpoint_uri,
                 auth=auth,
-                params=params
+                params=params,
+                verify=verify_certs
             )
         return requests.request(method, endpoint_uri, auth=auth, json=params)
 
     def request(self, args):
         """Send a parameterized request to this instance"""
-        return self._request(* self._retrieve_http_params(args))
+        verify_certs = False if args.insecure else True
+        return self._request(* self._retrieve_http_params(args), verify_certs)
 
     def get_info(self):
         """Get information about this instance"""

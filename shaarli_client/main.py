@@ -43,6 +43,11 @@ def main():
         '--outfile',
         help="File to save the program output to"
     )
+    parser.add_argument(
+        '--insecure',
+        action='store_true',
+        help="Bypass API SSL/TLS certificate verification"
+    )
 
     subparsers = parser.add_subparsers(
         dest='endpoint_name',
