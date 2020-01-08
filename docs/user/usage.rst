@@ -43,6 +43,7 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
                            Output formatting
      -o --outfile FILENAME
                            File to save the program output to
+     --insecure            Bypass API SSL/TLS certificate verification
 
 
 .. code-block:: bash
