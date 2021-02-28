@@ -41,7 +41,8 @@ setup(
     },
     install_requires=[
         'requests >= 2.10',
-        'requests-jwt >= 0.4, < 0.5'
+        'requests-jwt >= 0.4, < 0.5',
+        'pyjwt == 1.7.1'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -53,8 +54,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Topic :: Utilities',
     ]

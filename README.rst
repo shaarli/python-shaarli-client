@@ -1,8 +1,8 @@
 python-shaarli-client
 =====================
 
-.. image:: https://travis-ci.org/shaarli/python-shaarli-client.svg?branch=master
-   :target: https://travis-ci.org/shaarli/python-shaarli-client
+.. image:: https://travis-ci.com/shaarli/python-shaarli-client.svg?branch=master
+   :target: https://travis-ci.com/shaarli/python-shaarli-client
    :alt: Travis build status
 
 .. image:: https://readthedocs.org/projects/python-shaarli-client/badge/?version=latest
