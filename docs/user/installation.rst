@@ -50,7 +50,7 @@ To get ``shaarli-client`` sources and install it in a new `virtualenv`_:
   $ source ~/.virtualenvs/shaarli/bin/activate
 
   # build and install shaarli-client
-  (shaarli) $ python setup.py install
+  (shaarli) $ make install
 
   # check which packages have been installed
   $ pip freeze
