@@ -1,4 +1,4 @@
+-r ci.txt
 -r docs.txt
 -r tests.txt
-tox==3.0.0
 twine==1.11.0

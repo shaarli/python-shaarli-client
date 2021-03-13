@@ -9,6 +9,6 @@ matrix:
     - python: 3.6
       env: TOXENV=py36
 install:
-  - sudo apt install make
+  - pip install -r requirements/ci.txt
 script:
-  - make tests
+  - tox
