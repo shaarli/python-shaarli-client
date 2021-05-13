@@ -9,7 +9,32 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 .. _Keep A Changelog: http://keepachangelog.com/
 .. _Semantic Versioning: http://semver.org/
 
-`v0.4.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.3.0>`_ - 2020-01-09
+
+`v0.4.1 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.4.1>`_ - 2021-05-13
+---------------------------------------------------------------------------------------------
+
+**Added:**
+
+* Add support for Python 3.7, 3.8 and 3.9
+
+
+**Changed:**
+
+* Bump project and test requirements
+* Update test tooling and documentation
+
+
+**Removed:**
+
+* Drop support for Python 3.4 and 3.5
+
+
+**Security:**
+
+* Rework JWT usage without the unmaintained requests-jwt library
+
+
+`v0.4.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.4.0>`_ - 2020-01-09
 ---------------------------------------------------------------------------------------------
 
 **Added:**
