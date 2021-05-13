@@ -3,8 +3,8 @@ import calendar
 import time
 from argparse import Action, ArgumentTypeError
 
+import jwt
 import requests
-from requests_jwt import JWTAuth
 
 
 def check_positive_integer(value):
@@ -248,8 +248,12 @@ class ShaarliV1Client:
 
     def _request(self, method, endpoint, params, verify_certs=True):
         """Send an HTTP request to this instance"""
-        auth = JWTAuth(self.secret, alg='HS512', header_format='Bearer %s')
-        auth.add_field('iat', lambda req: calendar.timegm(time.gmtime()))
+        encoded_token = jwt.encode(
+            {'iat': calendar.timegm(time.gmtime())},
+            self.secret,
+            algorithm='HS512',
+        )
+        headers = {'Authorization': 'Bearer %s' % encoded_token}
 
         endpoint_uri = '%s/api/v%d/%s' % (self.uri, self.version, endpoint)
 
@@ -257,11 +261,16 @@ class ShaarliV1Client:
             return requests.request(
                 method,
                 endpoint_uri,
-                auth=auth,
+                headers=headers,
                 params=params,
                 verify=verify_certs
             )
-        return requests.request(method, endpoint_uri, auth=auth, json=params)
+        return requests.request(
+            method,
+            endpoint_uri,
+            headers=headers,
+            json=params,
+        )
 
     def request(self, args):
         """Send a parameterized request to this instance"""
