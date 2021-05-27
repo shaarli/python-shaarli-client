@@ -279,6 +279,7 @@ class ShaarliV1Client:
             endpoint_uri,
             headers=headers,
             json=params,
+            verify=verify_certs
         )
 
     def request(self, args):
