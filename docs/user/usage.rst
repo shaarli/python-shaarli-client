@@ -14,12 +14,11 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
    $ shaarli -h
 
    usage: shaarli [-h] [-c CONFIG] [-i INSTANCE] [-u URL] [-s SECRET]
-                  [--format {json,pprint,text}]
-                  {get-info,get-links,post-link,put-link,get-tags,get-tag,put-tag,delete-tag}
+                  [-f {json,pprint,text}] [-o OUTFILE] [--insecure]
+                  {get-info,get-links,post-link,put-link,get-tags,get-tag,put-tag,delete-tag,delete-link}
                   ...
-
    positional arguments:
-     {get-info,get-links,post-link,put-link,get-tags,get-tag,put-tag,delete-tag}
+     {get-info,get-links,post-link,put-link,get-tags,get-tag,put-tag,delete-tag,delete-link}
                            REST API endpoint
        get-info            Get information about this instance
        get-links           Get a collection of links ordered by creation date
@@ -29,6 +28,7 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
        get-tag             Get a single tag
        put-tag             Rename an existing tag
        delete-tag          Delete a tag from every link where it is used
+       delete-link         Delete a link
 
    optional arguments:
      -h, --help            show this help message and exit
@@ -39,9 +39,9 @@ The ``-h`` and ``--help`` flags allow to display help for any command or sub-com
      -u URL, --url URL     Shaarli instance URL
      -s SECRET, --secret SECRET
                            API secret
-     -f --format {json,pprint,text}
+     -f {json,pprint,text}, --format {json,pprint,text}
                            Output formatting
-     -o --outfile FILENAME
+     -o OUTFILE, --outfile OUTFILE
                            File to save the program output to
      --insecure            Bypass API SSL/TLS certificate verification
 
