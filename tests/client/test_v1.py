@@ -345,6 +345,18 @@ def test_delete_tags_uri(request):
     )
 
 
+@mock.patch('requests.request')
+def test_delete_link_uri(request):
+    """Ensure the proper endpoint URI is accessed"""
+    ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET).delete_link(1234, {})
+    request.assert_called_once_with(
+        'DELETE',
+        '%s/api/v1/links/1234' % SHAARLI_URL,
+        headers=mock.ANY,
+        json={}
+    )
+
+
 def test_retrieve_http_params_delete_tag():
     """Retrieve REST parameters from an Argparse Namespace - DELETE /tags"""
     args = Namespace(

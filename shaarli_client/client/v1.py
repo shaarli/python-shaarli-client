@@ -201,7 +201,6 @@ class ShaarliV1Client:
                 'help': "Link ID",
                 'type': check_positive_integer,
             },
-            'params': None,
         },
     }
 
@@ -327,6 +326,7 @@ class ShaarliV1Client:
         self._check_endpoint_params('delete-tag', params)
         return self._request('DELETE', 'tags/%s' % resource, params)
 
-    def delete_link(self, resource):
+    def delete_link(self, resource, params):
         """Delete a link"""
-        return self._request('DELETE', 'links/%d' % resource, {})
+        self._check_endpoint_params('delete-link', params)
+        return self._request('DELETE', 'links/%d' % resource, params)
