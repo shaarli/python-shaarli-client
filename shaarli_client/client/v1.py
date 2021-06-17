@@ -193,6 +193,15 @@ class ShaarliV1Client:
                 'help': "Tag name (case-sensitive)",
             },
         },
+        'delete-link': {
+            'path': 'links',
+            'method': 'DELETE',
+            'help': "Delete a link",
+            'resource': {
+                'help': "Link ID",
+                'type': check_positive_integer,
+            },
+        },
     }
 
     def __init__(self, uri, secret):
@@ -270,6 +279,7 @@ class ShaarliV1Client:
             endpoint_uri,
             headers=headers,
             json=params,
+            verify=verify_certs
         )
 
     def request(self, args):
@@ -316,3 +326,8 @@ class ShaarliV1Client:
         """Delete a tag"""
         self._check_endpoint_params('delete-tag', params)
         return self._request('DELETE', 'tags/%s' % resource, params)
+
+    def delete_link(self, resource, params):
+        """Delete a link"""
+        self._check_endpoint_params('delete-link', params)
+        return self._request('DELETE', 'links/%d' % resource, params)

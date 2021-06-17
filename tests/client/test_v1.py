@@ -188,6 +188,7 @@ def test_post_links_uri(request):
         'POST',
         '%s/api/v1/links' % SHAARLI_URL,
         headers=mock.ANY,
+        verify=True,
         json={}
     )
 
@@ -230,6 +231,7 @@ def test_put_links_uri(request):
         'PUT',
         '%s/api/v1/links/12' % SHAARLI_URL,
         headers=mock.ANY,
+        verify=True,
         json={}
     )
 
@@ -302,6 +304,7 @@ def test_put_tags_uri(request):
         'PUT',
         '%s/api/v1/tags/some-tag' % SHAARLI_URL,
         headers=mock.ANY,
+        verify=True,
         json={}
     )
 
@@ -341,6 +344,20 @@ def test_delete_tags_uri(request):
         'DELETE',
         '%s/api/v1/tags/some-tag' % SHAARLI_URL,
         headers=mock.ANY,
+        verify=True,
+        json={}
+    )
+
+
+@mock.patch('requests.request')
+def test_delete_link_uri(request):
+    """Ensure the proper endpoint URI is accessed"""
+    ShaarliV1Client(SHAARLI_URL, SHAARLI_SECRET).delete_link(1234, {})
+    request.assert_called_once_with(
+        'DELETE',
+        '%s/api/v1/links/1234' % SHAARLI_URL,
+        headers=mock.ANY,
+        verify=True,
         json={}
     )
 
