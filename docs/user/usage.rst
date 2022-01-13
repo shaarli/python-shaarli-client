@@ -278,3 +278,19 @@ If you need to include line breaks in your descriptions, use a literal newline `
 .. code-block:: bash
 
     $ shaarli post-link --url https://example.com/ --description 'One\nword\nper\nline'.
+
+
+NOT (minus) operator
+~~~~~~~~~~~~~~~~~~~~~
+
+It is required to pass all values to `--searchtags` as a quoted string:
+
+.. code-block:: bash
+
+    $ shaarli get-links --searchtags "video -idontwantthistag"
+
+The value passed to --searchtags must not start with a dash, a workaround is to start the string with a space:
+
+.. code-block:: bash
+
+    $ shaarli get-links --searchtags " -idontwantthistag -northisone"
