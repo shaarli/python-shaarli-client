@@ -75,3 +75,7 @@ def main():
         print(output)
     else:
         write_output(args.outfile, output)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
