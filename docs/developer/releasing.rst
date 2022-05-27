@@ -88,6 +88,6 @@ PyPI
 .. _Packaging and Distributing Projects: https://packaging.python.org/distributing/
 .. _PyPI: https://pypi.python.org/pypi
 .. _Python Packaging User Guide: https://packaging.python.org
-.. _TestPyPI: https://testpypi.python.org/pypi
-.. _TestPyPI Configuration: https://wiki.python.org/moin/TestPyPI
+.. _TestPyPI: https://test.pypi.org/
+.. _TestPyPI Configuration: https://packaging.python.org/en/latest/guides/using-testpypi/
 .. _twine: https://pypi.python.org/pypi/twine
