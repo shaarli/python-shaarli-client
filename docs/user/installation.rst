@@ -58,3 +58,11 @@ To get ``shaarli-client`` sources and install it in a new `virtualenv`_:
   requests==2.13.0
   requests-jwt==0.4
   shaarli-client==0.1.0
+
+You can also use ``pip`` to install directly from the git repository:
+
+.. code-block:: bash
+
+  $ python3 -m venv ~/.virtualenvs/shaarli
+  $ source ~/.virtualenvs/shaarli/bin/activate
+  (shaarli) $ pip3 install git+https://github.com/virtualtam/python-shaarli-client@master # or any other branch/tag
