@@ -1,7 +1,7 @@
 python-shaarli-client
 =====================
 
-.. image:: https://github.com/nodiscc/hecat/actions/workflows/ci.yml/badge.svg
+.. image:: https://github.com/shaarli/python-shaarli-client/actions/workflows/ci.yml/badge.svg
    :target: https://github.com/nodiscc/python-shaarli-client/actions
    :alt: Github Actions build status
 
