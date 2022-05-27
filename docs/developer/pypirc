@@ -4,10 +4,10 @@ index-servers=
     testpypi
 
 [pypi]
-repository = https://pypi.python.org/pypi
+repository = https://pypi.python.org/legacy/
 username = <PyPI username>
 
 [testpypi]
-repository = https://testpypi.python.org/pypi
+repository = https://test.pypi.org/legacy/
 username = <TestPyPI username>
 password = <TestPyPI password>
