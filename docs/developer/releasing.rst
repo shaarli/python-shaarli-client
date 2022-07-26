@@ -86,7 +86,7 @@ PyPI
 
 
 .. _Packaging and Distributing Projects: https://packaging.python.org/distributing/
-.. _PyPI: https://pypi.python.org/pypi
+.. _PyPI: https://pypi.org/
 .. _Python Packaging User Guide: https://packaging.python.org
 .. _TestPyPI: https://test.pypi.org/
 .. _TestPyPI Configuration: https://packaging.python.org/en/latest/guides/using-testpypi/
