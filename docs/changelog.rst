@@ -10,6 +10,28 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 .. _Semantic Versioning: http://semver.org/
 
 
+`v0.5.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.5.0>`_ - 2022-07-26
+---------------------------------------------------------------------------------------------
+
+**Added:**
+
+* Add ``delete-link`` command (delete a link by ID)
+
+
+**Changed:**
+
+* Update test tooling and documentation
+
+
+**Fixed:**
+
+* Fix ``--insecure`` option for non-GET requests
+
+**Security:**
+
+* Update `PyJWT <https://pypi.org/project/PyJWT/>`_ to 2.4.0
+
+
 `v0.4.1 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.4.1>`_ - 2021-05-13
 ---------------------------------------------------------------------------------------------
 
