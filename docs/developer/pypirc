@@ -4,7 +4,7 @@ index-servers=
     testpypi
 
 [pypi]
-repository = https://pypi.python.org/legacy/
+repository = https://upload.pypi.org/legacy/
 username = <PyPI username>
 
 [testpypi]
