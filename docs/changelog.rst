@@ -10,7 +10,7 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 .. _Semantic Versioning: http://semver.org/
 
 
-`v0.5.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.5.0>`_ - 2022-05-27
+`v0.5.0 <https://github.com/shaarli/python-shaarli-client/releases/tag/v0.5.0>`_ - 2022-07-26
 ---------------------------------------------------------------------------------------------
 
 **Added:**
