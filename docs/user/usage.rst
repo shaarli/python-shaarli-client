@@ -273,11 +273,11 @@ PUT tag
 New lines/line breaks
 ~~~~~~~~~~~~~~~~~~~~~
 
-If you need to include line breaks in your descriptions, use a literal newline ``\n`` and **single quotes** around the description:
+If you need to include line breaks in your descriptions, use a literal newline ``\n`` and `$'...'` around the description:
 
 .. code-block:: bash
 
-    $ shaarli post-link --url https://example.com/ --description 'One\nword\nper\nline'.
+    $ shaarli post-link --url https://example.com/ --description $'One\nword\nper\nline'.
 
 
 NOT (minus) operator
