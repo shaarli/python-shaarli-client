@@ -2,7 +2,7 @@ python-shaarli-client
 =====================
 
 .. image:: https://github.com/shaarli/python-shaarli-client/actions/workflows/ci.yml/badge.svg
-   :target: https://github.com/nodiscc/python-shaarli-client/actions
+   :target: https://github.com/shaarli/python-shaarli-client/actions
    :alt: Github Actions build status
 
 .. image:: https://readthedocs.org/projects/python-shaarli-client/badge/?version=latest
