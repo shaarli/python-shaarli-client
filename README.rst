@@ -10,3 +10,5 @@ python-shaarli-client
    :alt: Documentation Status
 
 A Python 3 Command-Line Interface to interact with a Shaarli instance.
+
+Documentation: https://python-shaarli-client.readthedocs.io/
