@@ -221,7 +221,7 @@ class ShaarliV1Client:
         if not params:
             return
 
-        invalid_parameters = list()
+        invalid_parameters = []
 
         for param in params.keys():
             if param not in cls.endpoints[endpoint_name]['params'].keys():
@@ -272,14 +272,16 @@ class ShaarliV1Client:
                 endpoint_uri,
                 headers=headers,
                 params=params,
-                verify=verify_certs
+                verify=verify_certs,
+                timeout=30
             )
         return requests.request(
             method,
             endpoint_uri,
             headers=headers,
             json=params,
-            verify=verify_certs
+            verify=verify_certs,
+            timeout=30
         )
 
     def request(self, args):

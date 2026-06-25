@@ -12,9 +12,18 @@ Environment and requirements
 static analysis and unitary tests, as it will create the appropriate testing
 virtualenvs on-the-fly.
 
+First, create a project virtualenv:
+
 .. code-block:: bash
 
-  (shaarli) $ pip install -r requirements/ci.txt
+  $ python3 -m venv .venv
+  $ . .venv/bin/activate
+
+Install tox:
+
+.. code-block:: bash
+
+  $ pip install -r requirements/ci.txt
 
 
 Nevertheless, in case you want to install *test*, *development* and *documentation*
@@ -22,7 +31,7 @@ dependencies, e.g. for editor integration or local debugging:
 
 .. code-block:: bash
 
-  (shaarli) $ pip install -r requirements/dev.txt
+  $ pip install -r requirements/dev.txt
 
 Tools
 -----

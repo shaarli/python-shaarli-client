@@ -43,7 +43,7 @@ def format_response(output_format, response):
 def write_output(filename, output):
     """Write the program output to a file"""
     try:
-        with open(filename, 'w') as outfile_handler:
+        with open(filename, 'w', encoding='utf-8') as outfile_handler:
             outfile_handler.write(output)
     except OSError:
         raise OSError("Unable to write output file %s" % filename)

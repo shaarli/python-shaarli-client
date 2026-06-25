@@ -121,7 +121,8 @@ def test_get_info_uri(request):
         '%s/api/v1/info' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        params={}
+        params={},
+        timeout=30
     )
 
 
@@ -147,7 +148,8 @@ def test_get_links_uri(request):
         '%s/api/v1/links' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        params={}
+        params={},
+        timeout=30
     )
 
 
@@ -189,7 +191,8 @@ def test_post_links_uri(request):
         '%s/api/v1/links' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        json={}
+        json={},
+        timeout=30
     )
 
 
@@ -232,7 +235,8 @@ def test_put_links_uri(request):
         '%s/api/v1/links/12' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        json={}
+        json={},
+        timeout=30
     )
 
 
@@ -292,7 +296,8 @@ def test_get_tags_uri(request):
         '%s/api/v1/tags' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        params={}
+        params={},
+        timeout=30
     )
 
 
@@ -305,7 +310,8 @@ def test_put_tags_uri(request):
         '%s/api/v1/tags/some-tag' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        json={}
+        json={},
+        timeout=30
     )
 
 
@@ -345,7 +351,8 @@ def test_delete_tags_uri(request):
         '%s/api/v1/tags/some-tag' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        json={}
+        json={},
+        timeout=30
     )
 
 
@@ -358,7 +365,8 @@ def test_delete_link_uri(request):
         '%s/api/v1/links/1234' % SHAARLI_URL,
         headers=mock.ANY,
         verify=True,
-        json={}
+        json={},
+        timeout=30
     )
 
 
