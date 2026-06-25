@@ -1,3 +1,3 @@
 docutils==0.14
-Sphinx>=1.7
+Sphinx>=9.1.0
 sphinx_rtd_theme>=0.3
