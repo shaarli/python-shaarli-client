@@ -2,7 +2,7 @@ coverage==7.16.0
 isort==8.0.1
 pycodestyle==2.14.0
 pydocstyle==6.3.0
-pylint==4.0.7
+pylint==4.0.8
 pytest==9.0.3
 pytest-cov==7.1.0
 pytest-pylint==0.21.0
