@@ -1,4 +1,4 @@
-coverage==7.16.0
+coverage==7.16.1
 isort==9.0.1
 pycodestyle==2.14.0
 pydocstyle==6.3.0
