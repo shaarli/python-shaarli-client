@@ -1,5 +1,5 @@
 coverage==7.16.1
-isort==9.0.1
+isort==9.0.2
 pycodestyle==2.15.0
 pydocstyle==6.3.0
 pylint==4.0.9
