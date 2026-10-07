@@ -41,7 +41,7 @@ setup(
     },
     install_requires=[
         'requests >= 2.25',
-        'pyjwt == 2.15.0'
+        'pyjwt == 2.15.1'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
